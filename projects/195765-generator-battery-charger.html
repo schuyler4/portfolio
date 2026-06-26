@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Battery Charger — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>Generator Battery Charger</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/195765-generator-battery-charger.JPG" alt="Generator Battery Charger">
+  <div class="description"><h2>Description</h2>
+<div>This is a project I did a little while ago. It is a generator that charges a lithium-ion battery pack. The difference between this and a just plugging a battery charger into a generator (good luck finding a good HV battery charger off the shelf) is the regulation is full system. That is, the constant current delivery to the battery is controlled via the throttle on the engine. This was able to charge a battery pack for a few minutes with an approximately constant current. </div>
+<h2>Details</h2>
+<div> <p><h3> To What Extent Does this Actually Work? </h3> <p> A ~150V battery pack was charged for several minutes with the system, and it appeared to regulate current fairly well. A longer test was not done because the battery pack was not fully protected with BMS (Cowboy Charging). There was not excessive current into the battery pack, but there was some ripple in the current (~0.5A), so the control system did not work perfectly, but it did seem to behave more like a current source than a voltage source. Additionally, the battery pack was made out of reused 18650 cells which may have had a higher than normal series resistance. This may have had an effect on the behavior of the control system. </p> <h3> Powertrain </h3> <p>The powertrain obviously starts with the engine. The engine is a Harbor Freight Preditor Series 212cc 6.5Hp. I suspect that the power rating may actually be lower based on the RPM and torque specs, but the system was only tested to several hundred watts max, so either way it is fine. The shaft of the engine is coupled to the shaft of the generator which is a Dayton 3N871 2Hp Motor. The three phases then go to the electrical powertrain shown below:</p> <figure><img src="../images/2321271714004573261.png"/></figure> <p>Because the generator is actually an induction motor, an excitation circuit is required for it to operate as a stand alone generator. This excitation circuit is the capacitor network shown connected to each incoming phase. The incoming phases then go into a three phase rectifier, which turns the AC voltage into a rectified DC. There is then an LC pi network which has the job of smoothing out this rectified DC. This is all that is needed to generate the DC voltage/current that is needed to charge the batteries. Additionally, for safety, there are isolation contactors, and a discharge circuit to bring the PI network capacitors down to a safe voltage when the system is not in operation. Also, there are voltage and current sensors to provide readings for the control system. These also have isolated low voltage circuitry. <br/></p> <h3> Low Voltage System </h3> <figure><img src="../images/319511714014626871.png"/></figure> <p>The low voltage system is shown above. It all revolves around the Arduino Nano, which is what facilitates the control system. The user operates the Arduino Nano, and in turn the entire charger, by sending serial commands from a connected computer. A servo motor, under the control of the Arduino Nano, is coupled to the throttle of the generator. This allows for control of the high voltage output, as voltage is proportional to RPM, and the throttle controls engine RPM. The actual control loop reads data from the current sensor (using the ADC), and adjusts the RPM accordingly based on a proportional controller, to try to hold a constant current. <br/></p> <p>In addition, there is a voltage sensor to terminate charging when the battery pack reaches a certain voltage. There is also an encoder to measure the shaft RPM, this helps facilitate voltage bring up and bring down, and detects when the engine has been turned on. Also shown is an interlock loop that opens the isolation relays given a variety of faults.<br/></p> </p> </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USB Curve Tracer — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>USB Curve Tracer</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/193572-usb-curve-tracer.JPG" alt="USB Curve Tracer">
+  <div class="description"><h2>Description</h2>
+<div>This is a curve tracer which can be used to measure semiconductors and resistors at low voltages. Plotting and control is done from an external computer. I have created three revisions of the device, two of which actually do something. </div>
+<h2>Details</h2>
+<div> <p><h3><strong>Theory of Operation</strong></h3><p>The device is powered using an external 12V power supply. Two high current buffers are created using op amps and BJTs. One of these buffers is simply set to half the supply voltage to create a reference voltage. The other buffer is wired to a DAC which is controlled by an Arduino Nano. There are differential amplifiers which measure the voltage across the DUT, and the current through it using a shunt. These are wired to an ADC which is read by the Arduino Nano. The Arduino Nano facilitates the DUT sweeping process, and it sends data to a plugged in computer. The plugged in computer runs a Python application which issues sweep commands to the Nano and plots the resulting IV data using Matplotlib</p> <h3><strong>Examples<br/></strong></h3> <p>Below is an example 1N4148 diode sweep and a 2N3904 BJT sweep. Short of curve tracing with a different system and doing a comparison, there is not really a good way to verify if these are correct. However, the general shape of the curves does look right. There is clearly some offset error for the red trace of the 2N3904 sweep.</p> <figure><img src="../images/427081701141843884.png"/></figure> <figure><img src="../images/981931701141863990.png"/></figure> <p><strong>Testing</strong></p> <p>My main test consists of sweeping a variety of resistor values using the curve tracer and comparing the results to the theoretical curves based on a DMM reading of the resistors. Here are some plots from my latest test:</p> <figure><img src="../images/700391699591570389.png"/></figure> <figure><img src="../images/6036191699591570408.png"/></figure> <figure><img src="../images/6037411699591570442.png"/></figure> <figure><img src="../images/2588261699591570442.png"/></figure> <figure><img src="../images/2797131699591570452.png"/></figure> </p> </div>
+<h2>Project Logs</h2>
+<ul><li><div>
+<p><p>In this test I compare a trace taken by the curve tracer to a trace taken using an AD3 scope, a function generator, and a sense resistor. This is done for the 1N4001 and 1N4148 diodes. The results are shown below. They appear to be pretty close. </p> <figure><img src="../images/1287191702775232416.png"/></figure> <figure><img src="../images/7459661702775294173.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>This is a test comparing manual measurements of diode curves to curves captured by the curve tracer. The manual measurements were done by current limiting a power supply and reading out the voltage. As can be observed from the plots, I didn't take many data points. The 1N4001 comparison seems pretty close; however, the 1N4148 has noticeable error. This may just be because the 1N4148 is zoomed in more. </p><figure><img src="../images/635551702169922596.png"/></figure><figure><img src="../images/7998111702169934700.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>The circuit board is mounted in an enclosure with stand offs. The screw terminal connections are run to banana connectors.</p><figure><img src="../images/4886081701221486343.jpg"/></figure>
+</p>
+</div></li></ul>
+  <h2>Files</h2>
+  <ul>
+      <li><a href="../pdfs/USB_curve_tracer_rev3_schematic.pdf">USB_curve_tracer_rev3_schematic.pdf — Rev 3 Schematic</a></li>
+  </ul></div>
+</div>
+</body>
+</html>

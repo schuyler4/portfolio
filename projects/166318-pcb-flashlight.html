@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Flashlight — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>PCB Flashlight</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/166318-pcb-flashlight.jpg" alt="PCB Flashlight">
+  <div class="description"><h2>Description</h2>
+<div>This project is a simple flashlight with no enclosure just a PCB. It is rechargeable via a USB plug and is powered by a lithium ion coin cell. It will also let the user now when it needs to be recharged and is done charging through other LED indicators. </div>
+<h2>Details</h2>
+<div> <p><p><strong>Circuit Design V3 (Has not been tested)</strong></p><p>Version 3 is the most recent version of the project so it is what will be detailed. I will assume that most of the circuit is fairly easy to understand from the schematic, this includes the battery monitor portion, the battery recharge portion and LED array. I will go into more detailed about the parts of the circuit that I do not find to be immediately obvious. The first of these is U5 which is being used as a buffer because the MIC842L cannot output enough current to drive the bases of both transistors. The next part is the USB connection detector. This ensures that none of LEDs are on and pulling current from the battery while the battery is charging; it does this by pulling down the voltage dividers, that are connected to the comparators, that control the LEDs, when the USB is pluged in. U1 is needed because measurements done on the last prototype show that there is a small amount of voltage on the USB rail even when it is not plugged in. This could potentially turn on Q1 if it was hooked up directly. </p> </p> </div>
+<h2>Project Logs</h2>
+<ul><li><div>
+<p><p>The prototype for version 3 has arrived and been assembled.  When it was first assembled there was a problem where I accidentally ordered the inverting version of the comparator instead of the non inverting version, this was easily fixed by getting the correct comparator. There is also a very dumb mistake where the low battery LED is on when the battery is not low and off when the battery is low, this is not worth making another version it will just be a battery ok LED instead of a battery low LED.  There is also an unintended feature/bug where the LED starts blinking instead of turning completely off when the battery voltage nears the dead battery threshold. This is almost certainly because the battery voltage goes up when the battery becomes unloaded and the 20mV of built in hysteresis on the comparator is not enough to compensate for it. The prototype has been through one discharge and charge cycle but not been extensively tested.</p><figure><img src="../images/6129361563075292898.jpg"/></figure>
+</p>
+</div></li><li><div>
+<p><p>The printed circuit board for version 3 has been completed and ordered. It is a bit smaller then the last version. </p><figure><img src="../images/8459741562536405542.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>The schematic for version 3 has been completed and added to the project files. The microcontroller has been removed from the circuit along with indications by different blinking patterns; instead two new LEDs off different colors have been added to indicate when the flashlight needs to be charged and when the flashlight is done charging. A USB connection detector has also been added so that none of the main LEDs can be on while the flashlight is plugged in. </p>
+</p>
+</div></li><li><div>
+<p><p>So far I am on the second version of the project. The first version did not work because I was trying to drive the LEDs in series with a boost converter, and the boost converter IC did not behave as I had expected it to. The second version works better but there are still some problems with it; there is nothing that tells the mircocontroller that the USB is plugged in so if the flashlight has not been run into its low battery state the LEDs will still be on while it is charging. This is a problem because the LEDs draw quite a bit of current from the battery. There is also a problem when the battery is done charging and the flashlight enters its done charging state, the LEDs start blinking in there done charging pattern. When this is happening the LEDs are still powered by the battery which means that after a little while the battery starts being charged again with the LEDs on. </p>
+</p>
+</div></li></ul>
+  <h2>Files</h2>
+  <ul>
+      <li><a href="../pdfs/PCB_Flashlight_V3.pdf">PCB Flashlight V3.pdf — Not fully functional.</a></li>
+      <li><a href="../pdfs/PCB_Flashlight_V2.pdf">PCB Flashlight V2.pdf — Not fully functional.</a></li>
+  </ul></div>
+</div>
+</body>
+</html>

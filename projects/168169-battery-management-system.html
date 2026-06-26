@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battery Management System — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>Battery Management System</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/168169-battery-management-system.jpg" alt="Battery Management System">
+  <div class="description"><h2>Description</h2>
+<div>The system consists of a circuit board which the 5 batteries can be plugged into. This circuit board has the necessary circuitry to charge and balance these batteries. It must be powered by an external 30V power supply while the batteries are charging but can monitor the batteries while they are being loaded only powered by the batteries. </div>
+<h2>Details</h2>
+<div> <p><p>The system has changed quite a lot with the second attempt; is is only designed for five batteries in series this time because regulation gets difficult with voltages that are high enough to charge ten batteries in series. Instead of the switching regulator and constant current sink that was used with the last version there are two LM317s, one wired as a constant voltage source, and one wired as a constant current source. These are then switched with P-channel MOSFETs. The battery voltage reading and balancing are the same as the last circuit. The controller is somewhat different; instead of using an Arduino with wires going over to the main board a ATMega328p is used on the board. This is programmed in C without the use of Arduino. </p> </p> </div>
+<h2>Project Logs</h2>
+<ul><li><div>
+<p><p>I have done quite a lot with the project sense the last update. I have got five fresh 18650 batteries to test it with. So far I have had mixed results, on the test after the first charge I was able to get nearly the capacity given by the manufacturer, but in proceeding tests the capacity that I was able to get started to go down. I will never be able to get full capacity because the low battery cutoff voltage in my system is a bit higher than the cutoff voltage given by the manufacturer. I also know that there is some systematic error with my scraped together current sink that I am using for testing; the current starts to drift up with time.</p><figure><img src="../images/3170621577767903902.jpg"/></figure><p>.  </p><p>I have also made a 3D printed enclosure for the project, I still need to make some type of lid.</p>
+</p>
+</div></li><li><div>
+<p><p>The firmware is completed for the most part; there are a few things that maybe could be improved. The next step is testing the BMS. I have come up with some test methods and I am starting the testing process. There will basically be a charge test and a discharge test where quantities such as battery voltage and time are measured. I am also going to try to do a coulomb counting test to determine battery pack capacity.  </p>
+</p>
+</div></li><li><div>
+<p><p>The hardware part of the next circuit board is hopefully finished; it has arrived and I have assembled it. I now working on writing the firmware, I have decided to take the plunge and not use the arduino framework (although I am using an arduino as an ISP programmer).</p><figure><img src="../images/335661574318641173.jpg"/></figure>
+</p>
+</div></li><li><div>
+<p><p> After spending quite a bit of time trying to make the first version work I decided to make another circuit board. The main problem with the first board was reading the battery voltages preciously; for some reason they were moving around significantly each time they were read. This may have been because of significant noise throughout the entire circuit from the switching regulator. I will add more details on the second board when I am finished designing it and I am in the process of testing it. </p>
+</p>
+</div></li><li><div>
+<p><p>Currently the programming is being done for this project. After trying some other options I have decided just to use the standard arduino IDE and framework. I am starting by just trying to balance and charge five batteries instead of the full 10 that the system can handle. Reading the battery voltages accurately has turned out to be somewhat of a problem. Filtering and possibly a more accurate ADC module may need to be added.  </p>
+</p>
+</div></li></ul></div>
+</div>
+</body>
+</html>

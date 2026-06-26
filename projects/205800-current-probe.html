@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Current Probe — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>Current Probe</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/205800-current-probe.jpg" alt="Current Probe">
+  <div class="description"><h2>Description</h2>
+<div>So I don't like to use the current mode on my multimeter. Also it is sometimes nice to measure current using an oscilloscope. Here I have made a stand alone current probe to measure current that can be used with either an oscilloscope or multimeter. It might be useless, or I might use it measure current a lot in the future. We'll see.</div>
+<h2>Details</h2>
+<div> <p><p>So probably no one cares, there aren't many real electronics guys on this website, but we will go through the circuit and operation a little bit here. The schematic is attached. Download it and take a look if you care. </p> <p>Basically we just have a shunt and a differential amplifier with a non-inverting stage to add some gains. The gains gives a 1:1 voltage current ratio. It is fused at 6A, but I have tested accuracy up to ~4A. Note the precise resistors used for the differential amplifier. </p> <p><img src="../images/8783501780271265017.png"/>And I guess current is a signed quantity which means we want to measure negative current. To do this we will need a negative rail. I used a charge pump IC to do this. It turns out utilizing these things is a real pain in the ass. I started by using LM2776. Don't use this thing it has real problems. I won't go into them as they are documented online. </p> <p>I then switched to the classic 7660. This one gave me a nice clean negative rail no problem, but I did another stupid and used ceramic capacitors. You can of course hear them in these switching circuits. So I had to replace the ceramics with electrolytic caps which normally I hate using. I also wasn't going to do another board spin for this. There are a bunch of awkwardly soldered through hole electrolytics on the 0805 pads. </p> <p>The frequency response is also problematic. Ideally it would be flatter than this. The op amp might make it roll off faster than it should. Really the cutoff frequency should be ~530kHz. I will probably mostly use this thing close to DC though, so I'm not going to worry about it too much.</p> <p><img src="../images/4185421780272700614.png"/><br/>The low battery circuit is mostly fine. There is some hysteresis with ~0.5V between the up going threshold and the down going threshold.<br/><strong>Low Battery Threshold</strong><img src="../images/7633021780273047866.png"/><strong>Low Battery Off Threshold</strong></p> <figure><img src="../images/7778601780273224385.png"/>One improvement would be a strategically placed cap so there isn't a flicker when the on/off switch is flipped. <br/><br/></figure> </p> </div>
+<h2>Project Logs</h2>
+<ul><li><div>
+<p><p>I realized I never measured the noise of this thing before. Here it's now: <br/><img src="../images/8103641781459062019.png"/>We are getting close to the noise floor of the scope. Here is an open scope:<br/></p> <figure><img src="../images/921241781459191928.png"/>As a side note this this AD3 has a surprising amount of offset and no offset null feature. Subtracting the scope noise using the root sum square method, we get about 300uVrms of noise. This is the same order of magnitude as my calculations. This noise is really what sets the lowest current that can be measured with the probe.</figure>
+</p>
+</div></li></ul>
+  <h2>Files</h2>
+  <ul>
+      <li><a href="../pdfs/shunt-current-probe.pdf">shunt-current-probe.pdf</a></li>
+  </ul></div>
+</div>
+</body>
+</html>

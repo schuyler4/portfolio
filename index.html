@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.5;
+  font-weight: 450;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 48px 0 40px;
+  text-align: center;
+}
+header h1 { font-size: 1.6rem; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+header p { color: #888; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+  padding: 40px 0;
+}
+.project-card {
+  border: 1px solid #ddd;
+}
+.project-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #ddd;
+}
+.project-card-body { padding: 14px 16px 18px; }
+.project-card-body h2 { font-size: 1rem; margin-bottom: 4px; font-weight: 600; }
+.project-card-body h2 a { color: #111; text-decoration: none; }
+.project-card-body h2 a:hover { text-decoration: underline; }
+.project-card-body p { color: #555; font-size: 0.85rem; line-height: 1.4; }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>Some of My Projects...</h1>
+  </div>
+</header>
+<div class="container">
+  <div class="project-grid">
+    
+    <div class="project-card">
+      <a href="projects/205873-thermocouple-o-scope-probe.html">
+        <img src="images/205873-thermocouple-o-scope-probe.jpeg" alt="Thermocouple O-Scope Probe" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/205873-thermocouple-o-scope-probe.html">Thermocouple O-Scope Probe</a></h2>
+        <p>A probe to measure temperature using an oscilloscope.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <a href="projects/205800-current-probe.html">
+        <img src="images/205800-current-probe.jpg" alt="Current Probe" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/205800-current-probe.html">Current Probe</a></h2>
+        <p>You got to measure the Amps.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <a href="projects/197104-ns1-oscilloscope.html">
+        <img src="images/197104-ns1-oscilloscope.jpg" alt="NS1 Oscilloscope" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/197104-ns1-oscilloscope.html">NS1 Oscilloscope</a></h2>
+        <p>A compact, headless, 62.5MS/s, 7.5MHz bandwidth oscilloscope.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <a href="projects/195765-generator-battery-charger.html">
+        <img src="images/195765-generator-battery-charger.JPG" alt="Generator Battery Charger" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/195765-generator-battery-charger.html">Generator Battery Charger</a></h2>
+        <p>A system to charge batteries with an engine.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <a href="projects/195109-multimeter.html">
+        <img src="images/195109-multimeter.JPG" alt="Multimeter" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/195109-multimeter.html">Multimeter</a></h2>
+        <p>This is my homebrew multimeter design. Included modes are VDC, Ohms, and Capacitance.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <a href="projects/193572-usb-curve-tracer.html">
+        <img src="images/193572-usb-curve-tracer.JPG" alt="USB Curve Tracer" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/193572-usb-curve-tracer.html">USB Curve Tracer</a></h2>
+        <p>This is a basic curve tracer that sends data to a computer to be plotted.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <a href="projects/168169-battery-management-system.html">
+        <img src="images/168169-battery-management-system.jpg" alt="Battery Management System" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/168169-battery-management-system.html">Battery Management System</a></h2>
+        <p>This is a system that charges, balances, and handles the output of 5 18650 batteries. It is also software controlled and customizable.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <a href="projects/166318-pcb-flashlight.html">
+        <img src="images/166318-pcb-flashlight.jpg" alt="PCB Flashlight" loading="lazy">
+      </a>
+      <div class="project-card-body">
+        <h2><a href="projects/166318-pcb-flashlight.html">PCB Flashlight</a></h2>
+        <p>A simple bright rechargeable flashlight.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

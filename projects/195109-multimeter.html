@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multimeter — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>Multimeter</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/195109-multimeter.JPG" alt="Multimeter">
+  <div class="description"><h2>Description</h2>
+<div>This is a basic multimeter design. I have tried to keep it as simple as possible in a variety of respects. Only the most basic modes are included: VDC, ohms, and Capacitance. It is powered via a USB cable, I figure most electronics workstations have an open USB plug, and the design is simpler as there is no rechargeable battery support circuitry. Additionally, to keep the front end simple, there is minimal range switching. </div>
+<h2>Details</h2>
+<div> <p><h2> <strong>Theory of Operation </strong></h2> <p> The multimeter is controlled by a Raspberry Pi Pico. This Pico reads digitized data from the front end, computes the voltage, resistance, or capacitance value, and drives the led display to display the value. </p> <h3> <strong>Display Driver </strong></h3> <p> For some reason I could not find a chip that would just drive a 4 digit seven segment display that I could easily purchase. Maybe I didn't look hard enough, or maybe it doesn't exist. Instead I basically made discrete IO pin buffers from p-channel and n-channel mosfets. <br/><img src="../images/7709181711167452535.png"/></p> <p> There are also four regular LEDs that indicate things like unit prefix and sign. These are not shown but can be found in the full schematic. <br/></p> <h3><strong>Analog Front End</strong></h3> <p>The analog front end conditions voltage readings that are read by the MCP3561 ADC. The conditioning circuit is selected by the various switches. When SW3 is in its default position, the meter is in voltage measurement mode. Switching it changes to component measurement mode. Changing between resistance and capacitance in component mode is facilitated by a logic switch wired up to the Pico (Not Shown). The range switch changes the range in component measurement mode. <br/></p> <figure><em><strong><img src="../images/8990081713068666281.png"/></strong></em></figure> <p><strong>Voltage Measurement<br/></strong>As can be observed, voltage measurement mode is a buffered voltage divider into the ADC. Another buffer floats this division at half the ADC reference voltage to allow for negative voltage reading. This floating of the measurement circuit is still there in component measurement mode, which is probably detrimental to performance. </p> <p><strong>Resistance Measurement<br/></strong>In component measurement mode, voltage is sourced by buffered 2.5V LM4030 voltage reference in series with the range resistor. There is also another resistor between the measurement node and the input terminal to provide some protection to the device. The combination of these resistors in series, and the resistance being measured creates a voltage divider and resulting voltage that is read by the ADC. The measurement resistance is then calculated in firmware using the known resistances and measured voltage.</p> <p><strong>Capacitance Measurement<br/></strong>Capacitance measurement is the same as resistance measurement except capacitance. This basically means that instead of measuring a static voltage, the voltage is constantly monitored for a dip that indicates a capacitor was connected. The resulting exponential rise is then sampled, and using the points from this sampling, the capacitance is found. All this computation is obviously done using the Pico. There is a trigger indicator to alert the user that they have triggered on a capacitance. <br/></p> <h3><strong>Improvements<br/></strong></h3> <p>The most lacking part of the design is probably the resistance measurement which only achieves 10% relative accuracy. The biggest issue with the resistance measurement is that it is using a ratio (series resistor) instead of a current source. This becomes a problem when the series resistor is very big compared to the resistance being measured. Additionally, the added series resistor in the network (Between the measurement resistor and the voltage reference series resistor) complicates the measurement algorithm and circuit.<br/></p> </p> </div>
+<h2>Project Logs</h2>
+<ul><li><div>
+<p><p>REV3 is coming along well. I have fixed most of the problems, and it is nearly ready for a final test after the new enclosure is completed. </p><p><br/>One of the most annoying things about REV2 was flicker in the display. Most of the time it was just a few counts of the least significant digit, so not consequential for reading accuracy, but it was annoying and looked amateurish. <br/></p><p>It turns out it was mostly a firmware/algorithm improvement that fixes this. Hardware filtering before the ADC definitely matters, but what really made the display look good was using an update customized IIR filter instead of just a windowed running average, and adding some hysteresis between real measurement and what was displayed. I considered adding hysteresis a while back, but I ended up not doing it because I couldn't find any evidence that it is used in commercial meters. After further study, I think it is likely that it is implemented to some extent, but just not documented. It is obviously common practice with single bit  analog to digital (comparators), and I just don't see how commercial meters can keep as steady as they do without it. I only added a little over a count, so a little over 1mV of hysteresis in voltage mode. </p>
+</p>
+</div></li><li><div>
+<p><p>The prototype for REV3 has been constructed.</p><figure><img src="../images/350641759200319799.jpg"/></figure><p>Unfortunately, there seem to small memory effects with the voltage reading after increasing the input impedance to 5.21M ohm in this revision. I'm going to attempt to create an auto zero circuit to compensate for this. In addition, there are a routing issues, and additional IO is really needed, as in this revision the LED pin on the pico board is used.</p>
+</p>
+</div></li><li><div>
+<p><p>After using REV2 as basically my daily driver for over a year, I decided it was time to make another revision to take care of some of the problems that are present in the REV2 design. REV3 has not yet been fabricated yet, but here is an overview of the changes. </p><p><strong>Better Resistance Measurement Circuit</strong></p><p>REV2 basically just utilized a voltage divider for resistance measurement. This approach is not ideal because the ADC codes per ohm is not constant. Also there was only two resistance ranges. The combination of these factors meant that the dynamic range of resistance measurement was not very high - only about 30Ω to 500kΩ, and the accuracy could be as bad as 10% at resistances near the limit of a range. To fix these problems I have implemented a constant current source to measure the resistance in REV3.</p><figure><img src="../images/6809961755655494269.png"/>Additionally there are 4 current ranges: 1mA, 100uA, 10uA, and 1uA. <br/><strong><br/>Diode Mode</strong><br/>I have realized that diode mode is useful enough to warrant inclusion on REV3. This will be implemented using one of the current ranges reading out the voltage instead of calculating the resistance in firmware.<br/><br/><strong>Analog Continuity Circuit</strong><br/>Previously continuity mode was implemented in software as part of resistance measurement utilizing a threshold. In REV3 I have added an actual amplifier and comparator that will be used with the current source to check for continuity. This way, hopefully the continuity threshold can be very low. I am aiming for 0.5Ω. <img src="../images/5196311755656270623.png"/><strong>No More Capacitance Mode</strong><br/>I decided that capacitance mode implemented with an RC step response did not work well enough, and I don't use capacitance mode on a multimeter very often anyway. So REV3 will not have capacitance mode. <br/><br/><strong>USB B Power Plug</strong><br/>Using the micro USB on the Pi Pico was not ideal. There is now a USB B connector: <br/><br/><img src="../images/6495141755657384058.png"/><br/></figure>
+</p>
+</div></li><li><div>
+<p><p>I have done a second calibration on both the full featured multimeter version, and the voltmeter version after ~1 year. No adjustments were needed. I have backed off the voltage spec to 0.5% relative accuracy. Both versions showed slightly higher error when measuring 1V compared to the first time I calibrated them. This leads to a large decrease in accuracy. 1V is low in the voltage range, so small differences lead to large errors.</p>
+</p>
+</div></li><li><div>
+<p><p>I have completed the final calibration for the second revision. The data is as follows:</p><pre><span>Voltage</span>:<span>Meter</span>, <span>Fluke</span> 101<span>-60</span><span>.28</span>, <span>-60</span><span>.4</span><span>-54</span><span>.70</span>, <span>-54</span><span>.81</span><span>-49</span><span>.86</span>, <span>-49</span><span>.90</span><span>-44</span><span>.88</span>, <span>-44</span><span>.97</span><span>-39</span><span>.86</span>, <span>-39</span><span>.93</span><span>-34</span><span>.93</span>, <span>-35</span><span>.00</span><span>-29</span><span>.89</span>, <span>-29</span><span>.94</span><span>-24</span><span>.90</span>, <span>-24</span><span>.94</span><span>-19</span><span>.92</span>, <span>-19</span><span>.95</span><span>-14</span><span>.94</span>, <span>-14</span><span>.96</span><span>-9</span><span>.956</span>, <span>-9</span><span>.97</span><span>-4</span><span>.972</span>, <span>-4</span><span>.978</span><span>-0</span><span>.987</span>, <span>-0</span><span>.989</span>0<span>.001</span>, 0<span>.000</span>0<span>.989</span>, 0<span>.989</span> 4<span>.975</span>, 4<span>.984</span>9<span>.960</span>, 9<span>.97</span>14<span>.94</span>, 14<span>.97</span>19<span>.92</span>, 19<span>.96</span>24<span>.90</span>, 24<span>.95</span>29<span>.89</span>, 29<span>.95</span>34<span>.81</span>, 34<span>.87</span>40<span>.00</span>, 40<span>.08</span>44<span>.80</span>, 44<span>.88</span>49<span>.90</span>, 50<span>.03</span>54<span>.97</span>, 55<span>.11</span>61<span>.04</span>, 61<span>.1</span><span>Resistance</span>:<span>Meter</span>, <span>Range</span>, <span>Fluke</span> 10129<span>.57</span>, 1, 31<span>.7</span>, 98<span>.33</span>, 1, 103<span>.3</span>332<span>.3</span>, 1, 332<span>.8</span>1081, 1, 104410730, 2, 10520 21930, 2, 21410 100500, 2, 97300339800, 2, 315200530000, 2, 484000<span>Capacitance</span>:<span>Meter</span>, <span>Range</span>, <span>Fluke</span> 10150<span>.88n</span>, 2, 49<span>.2n</span>96<span>.73n</span>, 2, 96<span>.6n</span>1<span>.006u</span>, 2, 1<span>.009u</span>10<span>.03u</span>, 1, 9<span>.92u</span>45<span>.57u</span>, 1, 47<span>.32u</span></pre><p>This works out to 0.3% relative accuracy for voltage, 10% for resistance, and 5% for capacitance. <br/></p>
+</p>
+</div></li><li><div>
+<p><figure><img src="../images/6592481711089097487.jpg"/></figure> <p>I have assembled and brought up the revision 2 PCB to the point where it reads voltage. Additional firmware is needed for mode switching and calibration is also needed.</p>
+</p>
+</div></li><li><div>
+<p><p>I have mounted the first revision into an aluminum sheet metal enclosure with some holes cut in it. The first revision has been repurposed into just a voltmeter because there are some problems with the switching circuit. <br/></p>
+</p>
+</div></li><li><div>
+<p><p>I did another test with the rev1 prototype, this time only measuring voltage, and bringing it all the way to the maximum voltage of 60V. Again I am doing calibration and comparison to my Fluke 101 Multimeter. This has a problem as the Fluke 101 does not have more digits than this multimeter, however, I am ignoring this for now. I was able to stay under 1% error for all measurements, and I think this could be improved with a better calibration procedure. Here are the results:</p><pre>Voltage(V), Error(%)0<span>.989,</span> 0<span>.0</span>4<span>.982</span>, 0<span>.71</span>9<span>.97</span>, 0<span>.76</span>14<span>.96</span>, 0<span>.81</span>19<span>.95,</span> 0<span>.86</span>24<span>.94</span>, 0<span>.85</span>29<span>.94</span>, 0<span>.88</span>34<span>.99</span>, 0<span>.86</span>40<span>.03</span>, 0<span>.83</span>44<span>.9</span>, 0<span>.81</span>49<span>.89</span>, 0<span>.85</span>54<span>.84</span>, 0<span>.9</span>59<span>.8</span>, 0<span>.71</span></pre>
+</p>
+</div></li><li><div>
+<p><p>To make the display work on revision 1, I bypassed the display driver and wired the pico IO pins strait to the segment LEDs. It is a little faint, as the display driver circuit worked completely differently, but it works to test the display. <br/></p><figure><img src="../images/7069761710290684294.jpg"/></figure>
+</p>
+</div></li><li><div>
+<p><p>As the title says, this is a preliminary test of the first version of the multimeter. Before thetest, I basically calibrated it using my Fluke 101 as a reference. The results of the test areas follows:</p> <pre>2<span>.5V</span><span>Error</span>: 0<span>.569</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.0102</span>5<span>V</span><span>Error</span>: 0<span>.2342</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.001</span>7<span>.5V</span><span>Error</span>: 0<span>.2404</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.0019</span>10<span>V</span><span>Error</span>: 0<span>.0671</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.0006</span>10<span>ohm</span><span>Error</span>: 48<span>.5352</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.0</span>100<span>ohm</span><span>Error</span>: 8<span>.2285</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.0</span>1000<span>ohm</span><span>Error</span>: 0<span>.0443</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.0</span>10000<span>ohm</span><span>Error</span>: 1<span>.9391</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.0</span>40000<span>ohm</span><span>Error</span>: 5<span>.2247</span>, <span>Coeff</span> <span>of</span> <span>Var</span>: 0<span>.1246</span></pre> <p>As can be observed, the error is fairly low for all the tested voltages. For resistance, the error is higher especially at the low and high ends. It basically isn't accurate at all at 10 ohms. I also did a test of capacitance and for 100nF it measured 579nF, so basically orderof magnitude. For 10uF it measured 11.78uF, so close. I may be able to make capacitance better  (for 100nF) by increasing the sample rate. <br/></p>
+</p>
+</div></li></ul></div>
+</div>
+</body>
+</html>

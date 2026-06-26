@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thermocouple O-Scope Probe — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>Thermocouple O-Scope Probe</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/205873-thermocouple-o-scope-probe.jpeg" alt="Thermocouple O-Scope Probe">
+  <div class="description"><h2>Description</h2>
+<div>It would be interesting and useful to measure temperature using an oscilloscope in roll mode. This way there is actually a waveform. You can see when equilibrium is reached, and if there is any change in temperature in your process it's easily viewable. There does not seem to be an available general purpose probe to this, so that is what we are building.</div>
+<h2>Details</h2>
+<div> <p><p>This project is still in its very early stages. Currently the first version is being designed, and I have done some early experiments with ice bath and boiling bath with another thermocouple amplifier instrument I have (Omega 2175A). </p> <p>One thing under consideration is the thermal inertia of the thermocouple itself. We are using this with an oscilloscope, we want the response time to be as fast as possible. The thermal inertia of the thermocouple needs to be as low as possible. In order to achieve this an exposed junction type thermocouple must be used. We don't want a conduction path between our thermocouple junction and our scope, however. This means that the actual sensing circuit must be isolated. This will pose a significant complication in the circuit design. </p> <h2><strong>Schematic </strong></h2> <figure><img src="../images/2298831781995371060.png"/>The schematic for the first revision is complete. Of course, there might be serious issues with this design as it has not been built yet. See the logs for more info, but the key details are the 1X and 10X ranges and the isolation gap.</figure> </p> </div>
+<h2>Project Logs</h2>
+<ul><li><div>
+<p><p>I would like to use a 9V battery to power the probe. The circuit is actually going to drink quite a bit of current, however. Particularly when it's in 10X mode:</p><figure><img src="../images/2774851781921863775.png"/>This results in:<br/><img src="../images/822101781922045067.png"/>5-10 hours operating time should be fine though. Maybe in the future an option for an auxiliary power supply will be added so the probe can be used for very long time scale logging.<br/><br/>There is also a low battery detection circuit:<br/><img src="../images/5351581781922294881.png"/>This circuit triggers a low battery indicator when the 9V battery reaches ~6.5V.</figure>
+</p>
+</div></li><li><div>
+<p> <figure><img src="../images/7598971781236577000.png"/><br/></figure> <p>The AD8495 is used with a K type thermal couple. This is gives an output of 5mV/deg C with a +/-2 deg C non linearity error. The AMC1301 has a maximum differential input voltage of +/-0.25V, so without the 10X division this means a maximum temperature of 50 deg C, and a maximum temperature of 500 deg C with the 10X division. The NCS333ASN2T1G buffer is needed, because the AMC1301 has an input bias current of -30uA. This would give a voltage offset of -27mV without the buffer. The NCS333ASN2T1G has an input bias current of 400pA and an offset voltage of up to 10uV. The input bias current generates a negligible offset. The offset voltage will add a 0.002 deg C error with 1X division and a 0.2 deg C error with 10X division. The AMC1301 has a gain of 8.2 with an error of +/-0.05%. The INA128 gain is then set to 2.439, so the final output is 0.1V/(deg C) or 0.01V/(deg C). The INA128 has an output offset voltage of 243.9uV.</p> <p>Let's see if we can add up all these errors. Basically we have +/-2.2 deg C or +/-2.002 with 10X division plus +/-0.05% gain error. Plus another 0.0024 deg C or 0.024 deg C from the INA128 offset voltage. This does not include errors from resistor tolerance. </p> <p>As for noise, we have 32nV/sqrt(Hz) from AD8495 times a full system gain of 2000 is 64uV/sqrt(Hz). We then have 62nV/sqrt(Hz) from the NCS333ASN2T1G times a gain of 10. so 620nV/sqrt(Hz). Adding these two together we get ~64uV/sqrt(Hz). Multiplying this by this system bandwidth ~10kHz, we get an output noise of 6.4mVrms. This corresponds to about 0.2 deg C of noise in 1X mode and about 2 deg C of noise in 10X mode. This might turn out looking like a lot of noise, but the bandwidth can always be lowered to reduce it. </p><p>No doubt a lot of this is wrong, as I probably did some incorrect math in there somewhere. But hopefully it's a good order of magnitude estimate. </p>
+</p>
+</div></li><li><div>
+<p><p>I have made some progress on the schematic. Most of the components are down, but I have not calculated many of the values yet. As you can see, we are just using the AD8494 thermocouple amplifier combined with the AMC11000 for isolation. There is also a selectable division so the output can go to either 50 deg C full scale or 500 deg C full scale. This corresponds to 0.1V/(deg C) or 0.01V/(deg C) respectively. Other than that there are just a bunch of linear regulators to generate different power rails, and a low battery detection circuit. </p><figure><img src="../images/1672721781040441637.png"/><br/></figure>
+</p>
+</div></li></ul></div>
+</div>
+</body>
+</html>

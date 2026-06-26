@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NS1 Oscilloscope — schuyler4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  font-weight: 450;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+header {
+  background: #111;
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 2px solid #333;
+}
+header a { color: #888; text-decoration: none; font-size: 0.85rem; }
+header a:hover { color: #fff; }
+header h1 { font-size: 1.5rem; margin-top: 8px; font-weight: 600; }
+.cover-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  margin: 28px 0;
+  border: 1px solid #ddd;
+}
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.description h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.description h2:first-child { margin-top: 0; }
+.description h3 {
+  font-size: 1rem;
+  margin: 24px 0 8px;
+  font-weight: 600;
+}
+.description h4 { font-size: 0.95rem; margin: 16px 0 6px; font-weight: 600; }
+.description p { margin: 0 0 14px; }
+.description p:last-child { margin-bottom: 0; }
+.description ul, .description ol { margin: 0 0 14px; padding-left: 22px; }
+.description li { margin-bottom: 4px; }
+.description li:last-child { margin-bottom: 0; }
+.description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px 0;
+  border: 1px solid #ddd;
+}
+.description figure {
+  margin: 20px 0;
+}
+.description figure img { margin: 0; }
+.description figcaption {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+}
+.description pre {
+  background: #f6f6f6;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 14px 0;
+  border: 1px solid #eee;
+}
+.description code {
+  background: #f6f6f6;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+.description pre code { background: none; padding: 0; }
+.description blockquote {
+  border-left: 3px solid #ccc;
+  margin: 14px 0;
+  padding: 6px 16px;
+  color: #555;
+}
+.description hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
+.description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+}
+.description th, .description td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.description th { font-weight: 600; }
+.back-link { display: inline-block; margin-bottom: 6px; }
+footer {
+  text-align: center;
+  padding: 28px 0;
+  color: #888;
+  font-size: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">&larr; Back to all projects</a>
+    <h1>NS1 Oscilloscope</h1>
+  </div>
+</header>
+<div class="container">
+  <img class="cover-image" src="../images/197104-ns1-oscilloscope.jpg" alt="NS1 Oscilloscope">
+  <div class="description"><h2>Description</h2>
+<div>NS1 is a compact, headless, single channel oscilloscope featuring 7.5MHz bandwidth and a sample rate of 62.5MS/s. NS1 is designed to be just enough for many common analysis and debugging tasks. It is not intended to replace a fully featured bench top scope, but rather it is a sidearm for quick checks and computer based analysis. NS1 uses the RP2040 microcontroller for signal acquisition, leveraging its PIO and DMA peripherals to achieve a high 62.5MS/s sample rate. This makes NS1 exceptionally fast for a microcontroller based oscilloscope. Given NS1's lack of a head, waveform visualization and control are handled via Voltpeek. Voltpeek is a custom oscilloscope control software written in Python; it communicates with NS1 over simple USB serial. Voltpeek utilizes a fully command based UI which we consider to be a necessity for an easily usable PC based oscilloscope. Voltpeek can also be used for direct Python scripting to automate waveform capture and control.</div>
+<h2>Details</h2>
+<div> <p> <ul><li>16384 point memory depth</li><li>4 ranges 1V, 2V, 5V, 10V, all full scale</li><li>rising edge and falling edge trigger</li><li>7.5MHz bandwidth (+0.6dB, -3dB)</li><li>62.5MS/s</li><li>Single Channel</li><li>+/-4% of full scale DC Accuracy</li></ul> <p>Here are some example waveforms captured with the NS1:</p> <figure><img src="../images/7905401748981912557.png"/></figure> <figure><img src="../images/5836061748982170175.png"/></figure> <figure><img src="../images/2449031748982191815.png"/></figure> <p><strong>Frequency Response<br/></strong></p> <p>Here is a measured frequency response for each of the ranges. The frequency response is shaped digitally via a 3 point FIR filter. That is, this is the overall system frequency response, not just the analog front end response.</p> <figure><img src="../images/441261752124717294.png"/></figure> <figure><img src="../images/3517191752124681354.png"/></figure> <figure><img src="../images/6797541752124650419.png"/></figure> <figure><img src="../images/4148601752124627623.png"/><br/></figure> <p><strong>Triggering</strong></p> <p>The system has two triggering modes, force trigger and normal trigger. Force trigger starts the capture when the trigger is initiated, whereas normal trigger waits for a trigger edge event before starting the capture. With normal trigger mode, the trigger event is recorded at the center of the capture. Normal trigger is achieved with a comparator and a settable trigger voltage as shown below:</p> <figure><img src="../images/2753311744405383419.png"/>There is also a trigger correction algorithm in Voltpeek to properly center the trigger event.<br/><br/><strong>Gain and Attenuation Settings</strong><br/>There are two attenuator settings and two gain settings. These are what scale the input signal to create the four possible ranges:<img src="../images/9882591744405820587.png"/><br/></figure> <p><strong>Software</strong></p> <p> is the software written to control and display the data that is sampled using NS1. Unlike other PC based oscilloscope software, Voltpeek is a command based UI. This is done because click and drag based UIs can be extremely annoying when they are controlling complicated processes. Voltpeek has a similar user interface to Vim. Different commands control the system, and the software can be put in adjustment mode. Adjustment mode is used to adjust the scales, cursors, and trigger level using the <code>h</code>, <code>j</code>, <code>k</code>, and <code>l</code>keys. </p> <p><strong>Prior Work<br/></strong></p> <p>NS1 is not the first oscilloscope project to utilize the Pi Pico/RP2040 PIO and DMA peripherals to create a fast oscilloscope. Some similar projects that have done this are listed below:</p> </p> </div>
+<h2>Project Logs</h2>
+<ul><li><div>
+<p><p>Recently I have been doing a more serious attempt at implementing roll mode. This is a particularly import feature, as oscilloscopes of this caliber are often times used more like a data logger than an oscilloscope. Given this, it is important that the NS1 actually has data log capabilities (roll mode).</p><p>On the firmware side, I'm just using a simple hardware timer. This may not be the best way to do it, but it is the easiest way to get the feature off the ground. It is the software where things get somewhat difficult. Definitely more difficult than the standard capture implementation. </p><p>Currently the software periodically grabs roll mode data if roll mode is running, pipes the data through all its layers, and puts it on the display. The only difference from the standard capture mode is that the data does not have a fixed length, so it must be displayed accordingly. The display interpolation code is as follows:</p><pre>f = interp1d(np.arange(len(roll_buffer)) / roll_sample_rate, roll_buffer, kind=<span>'linear'</span>, fill_value=<span>-100</span>, bounds_error=<span>False</span>)resampled = f(np.arange(<span>self</span>._size) * time_per_pixel)<span>self</span>._roll_vectors[scope_index] = <span>self</span>._quantize_vertical(resampled, vert_setting)</pre><p>This nearly works, but there is a subtle problem with it; we are interpolating samples that are not new. That is, we are re-interpolating old samples that are not new on the particular display update. This leads to an interesting visual effect which is changing noise on the already captured signal. There is obviously no physical reason for this. It is an artifact of re-interpolating the old signal!</p><p>The solution to this is a piecewise interpolation of the new data for the display. I'm working on this, but it is easier said than done. </p><p>(Image of roll mode data. Ignore sample rate and NEUTRAL state. That is not showing correctly for roll mode.)</p><figure><img src="../images/4009571773529037509.png"/><br/></figure>
+</p>
+</div></li><li><div>
+<p><p>Recently I have been working on a way that Voltpeek software can be used even if you don't have the NS1 hardware. I have written some  which uses the internal ADC on the RPi Pico instead of the external ADC and front end utilized by the NS1. This creates a rudimentary oscilloscope with just a Pico required on the hardware side. However, this obviously comes with some extreme limitations. First, the internal ADC can only sample at 500kS/s - a very low sample rate for an oscilloscope. Second, there is no front end, so the input signal is limited to 0V-3.3V with no ranges. Also, 0V is not present when the input is floating as it should be. I have only implemented auto trigger at this point, but normal trigger may be coming in the future as well as some front end options.</p><p>Below you can see a 100kHz square wave captured with this system:</p><figure><img src="../images/759911753766117872.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>Recently, I have been working on improving the trigger flow. The original issue involved starting a normal trigger or single trigger and not triggering on a waveform, and then making another adjustment like horizontal or vertical scale or trigger type. This would cause the scope to freeze and forced you to close the software and power cycle the scope. Fixing this required making changes to both the software and firmware with respect to how an armed trigger is stopped. Unfortunately, now that the problem is fixed, there is another problem where there is minor waveform ghosting when adjusting the scale when a normal trigger waveform is refreshing. Fortunately, this is a relatively minor artifact and doesn't significantly affect functionality.</p>
+</p>
+</div></li><li><div>
+<p><p>It is now possible to use normal trigger with multiple channels with the resulting waveforms synchronized. However, this feature is experimental; there are a lot of bugs and problems still. <br/></p><p>The two oscilloscopes are synchronized by passing the trigger output from one scope to the trigger input of the next scope. This is shown in the picture below</p><figure><img src="../images/2409501750566206694.jpg"/></figure><p>Currently, trigger input and output are just headers on the board, but the plan is for them to eventually be SMA connectors or similar mounted on the back of the scope. </p><p>Using these two channels it was possible to capture the following waveform (input and output of a half wave rectifier). </p><figure><img src="../images/4010361750567329000.png"/></figure><p>1) Better identification of scopes. There must be a master scope which actually triggers on a waveform and triggers other connected scopes. Currently it is very difficult to figure out which scope this is. To fix this each scope will have to store its own serial number which voltpeek can then read and display.</p><p>2) Trigger jitter between channels. It is possible to correct trigger jitter from one channel in software and apply the same correction to the other channel, but when trigger jitter is uncorrelated channel to channel, it becomes a problem again. This is noticeable on very low time scales.</p><p>3) Various bugs related to freezing and the waveforms not being displaced correctly. </p><p>4) Add synchronization for auto trigger. This will require new PIO code.</p>
+</p>
+</div></li><li><div>
+<p><figure>I have begun work on multiple channels. Multiple channels are implemented by plugging in multiple NS1s into the same host computer; Voltpeek can then connect to both of them and capture data. Each NS1 is a channel. The channels are not synchronized yet. The waveforms below show the same square wave, but they appear offset. There is a way to synchronize them using the trigger circuit; I just haven't tried to implement it yet.<img src="../images/1132261750113843924.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>In Voltpeek, it is now possible to zoom in on a stopped capture correctly. An example of this is shown:</p> <figure><img src="../images/399331749418156706.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>I have discovered that adding a low pass filter in between the last op amp stage and the ADC like shown below improves the distortion performance of the scope.</p><figure><img src="../images/8784191748985208737.png"/></figure><p>This has -3dB frequency of ~170MHz, so it does not lower the bandwidth of the scope. Rather, as mentioned in the datasheet of the ADC08100, the circuit absorbs energy coming out of the ADC input.</p><p>Below are triangle waves measured using scopes without and with this modification.</p><figure><img src="../images/7437651748986143210.png"/></figure><figure><img src="../images/2334221748986284214.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>A falling edge trigger feature has been added. An RC discharge waveform is shown below demonstrating this:</p> <figure><img src="../images/9561561727581161054.png"/></figure>
+</p>
+</div></li><li><div>
+<p><p>The trigger event is finally recorded at the center of the capture instead of the start. This is achieved using a more complicated PIO program, and a DMA ping pong configuration that creates a ring buffer. Here is an example RC circuit waveform that demonstrates this capability:</p><figure><img src="../images/5480021725055588571.png"/></figure>
+</p>
+</div></li></ul>
+  <h2>Files</h2>
+  <ul>
+      <li><a href="../pdfs/NS1_schematic.pdf">NS1_schematic.pdf — Latest revision schematic</a></li>
+  </ul></div>
+</div>
+</body>
+</html>
